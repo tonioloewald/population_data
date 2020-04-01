@@ -14,3 +14,15 @@ and scraped the data using this snippet of code in the console:
 ```
 
 I hope you find it useful.
+
+## Why .tsv?
+
+`<rant>`
+
+`.csv` is the dumbest file format ever devised. It requires a stateful parser rather than simple
+string splitting to parse and has no proper standard.
+
+If you want to parse a `.tsv` in Javascript, you simply split it by '\n' to get the rows and then
+'\t' to get the cells. It's smaller, simpler, easier to read, and easier to write.
+
+`</rant>`
