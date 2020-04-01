@@ -17,6 +17,9 @@ I hope you find it useful.
 
 ## Using this data directly
 
+You can just pull the data directly from github at `https://tonioloewald.github.io/population_data/population-data.tsv`.
+Github has an awesome CDN and everything so it's just that simple.
+
 In vanillajs you can get the data thus:
 
 ```
