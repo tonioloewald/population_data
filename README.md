@@ -15,6 +15,40 @@ and scraped the data using this snippet of code in the console:
 
 I hope you find it useful.
 
+## Using this data directly
+
+In vanillajs you can get the data thus:
+
+```
+async function getPopulationData () {
+  const response = await fetch('https://tonioloewald.github.io/population_data/population-data.tsv')
+  const text = await response.text()
+  const rows = text.split('\n').map(line => line.split('\t'))
+  const headings = rows.unshift()
+  const countryColumnIndex = 1
+  const populationColumnIndex = 2
+  const  getColumnIndex = (column) =>  column === 'string' ? headings.findIndex(column) : column
+  const getCell = (country, column = populationColumnIndex) => {
+    const columnIndex = getColumnIndex(column)
+    return rows.find(row => row[countryColumnIndex] === country)[columnIndex]
+  }
+  return {
+    headings,
+    rows,
+    getColumnIndex,
+    getCell,
+  }
+}
+```
+
+Using the above:
+
+```
+p = await getPopulationData()
+// population column is formatted with commas, e.g. "25,499,884"
+const australiaPopulation = parseInt(p.getCell('Australia').replace(/,/g, ''))
+```
+
 ## Why .tsv?
 
 `<rant>`
