@@ -32,11 +32,14 @@ async function getPopulationData () {
     const columnIndex = getColumnIndex(column)
     return rows.find(row => row[countryColumnIndex] === country)[columnIndex]
   }
+  // population column is formatted with commas, e.g. "25,499,884"
+  const getPop = country => parseInt(p.getCell(country).replace(/,/g, ''))
   return {
     headings,
     rows,
     getColumnIndex,
     getCell,
+    getPop,
   }
 }
 ```
@@ -45,8 +48,7 @@ Using the above:
 
 ```
 p = await getPopulationData()
-// population column is formatted with commas, e.g. "25,499,884"
-const australiaPopulation = parseInt(p.getCell('Australia').replace(/,/g, ''))
+p.getPop('Australia')
 ```
 
 ## Why .tsv?
